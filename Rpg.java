@@ -32,22 +32,22 @@ public class Rpg {
 
         switch (classeEscolhida) {
             case 1:
-                classe = "Guerreiro";
+                
                 return "Golpe poderoso";
             case 2:
-                classe = "Mago";
-                return "Lança feitiço";
+                
+                return "Lanca feitico";
             case 3:
-                classe = "Arqueiro";
-                return "Lança flecha";
+               
+                return "Lanca flecha";
             default:
-                classe = "Desconhecida";
-                return "Inválido, tente novamente";
+               
+                return "Invalido, tente novamente";
         }
     }
 
     // Método para mostrar o status
-    public String status() {
+    /*public String status() {
         return "Nome: " + nome + " | Classe: " + classe + " | Habilidade: " + usarHabilidadeEspecial();
-    }
+    }*/
 }
