@@ -9,8 +9,13 @@ public class Rpg {
     public int vida = 100;
     public int forca;
     public int opcao;
+    public int personagem1 = 1;
+    public int personagem2 =2;
+    public int personagemAtual = personagem1;
 
     Scanner scanner = new Scanner(System.in);
+
+
 
     // Método que pede ao usuário para escolher a classe e retorna a opção escolhida
     public int classe() {
@@ -47,6 +52,9 @@ public class Rpg {
         }
     }
 
+    public void atacar(){
+        if
+    }
     // Método para mostrar o status
     /*public String status() {
         return "Nome: " + nome + " | Classe: " + classe + " | Habilidade: " + usarHabilidadeEspecial();
