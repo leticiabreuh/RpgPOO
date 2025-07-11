@@ -5,7 +5,8 @@ public class Rpg {
     public String nome;
     public String classe;
     public int nivel;
-    public int mana;
+    public int mana=100;
+    public int vida = 100;
     public int forca;
     public int opcao;
 
