@@ -1,30 +1,32 @@
-import java.util.Scanner;
-
-public class ProgramaRpg {
+public class ProgramaRPG {
+    
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Personagem guerreiro = new Personagem();
+        Personagem mago = new Personagem();
 
-        Rpg personagens = new Rpg();
+        guerreiro.name   = "Thor";
+        guerreiro.classe = "Guerreiro";
+        guerreiro.nivel = 1;
+        guerreiro.vida = 100;
+        guerreiro.atacar();
+        guerreiro.receberDano(15);
+        guerreiro.usarHabilidadeEspecial();
+        guerreiro.subirNivel();
+        guerreiro.mostrarStatus();
+        guerreiro.desenharPersonagem();
 
-        // Exibir mensagem de boas-vindas
-        System.out.println(personagens.boasvindas());
+        System.out.println();
 
-        // Coletar nomes dos personagens
-        personagens.nomes(); 
-
-        // Coletar classes e atribuir habilidades, vida e mana
-        personagens.escolherClasse(); 
-
-        // Mostrar resumo
-        System.out.println("\nResumo dos personagens:");
-        for (int i = 0; i < personagens.nome.length; i++) {
-            System.out.println("Personagem " + (i + 1) + ": " + personagens.nome[i]
-                    + " - Classe: " + personagens.classe[i]
-                    + " - Habilidade: " + personagens.habilidade[i]
-                    + " - Vida: " + personagens.vida[i]
-                    + " - Mana: " + personagens.mana[i]);
-        }
-
-        scanner.close(); // boa prática: fechar o scanner ao final
+        mago.name = "Merlin";
+        mago.classe = "Mago";
+        mago.nivel = 1;
+        mago.vida = 100;
+        mago.atacar();
+        mago.receberDano(25);
+        mago.usarHabilidadeEspecial();
+        mago.subirNivel();
+        mago.mostrarStatus();
+        mago.desenharPersonagem();
+    
     }
 }

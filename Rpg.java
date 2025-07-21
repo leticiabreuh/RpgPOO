@@ -1,77 +1,104 @@
-import java.util.Scanner;
+public class Rpg{
 
-public class Rpg {
-    // Atributos
-    public String[] nome = new String[2];
-    public String[] classe = new String[2];
-    public String[] habilidade = new String[2];
-    public int[] vida = new int[2]; 
-    public int[] mana = new int[2];
-    public int nivel = 1;
-    public int forca;
+   public String name;
+   public String classe;
+   public int nivel;
+   public int vida;
+   public int mana;
+   public int forca;
+   public int personagemAscii;
 
-    Scanner scanner = new Scanner(System.in);
-
-    public String boasvindas() {
-        return "BEM-VINDO AO JOGO\nVAMOS COMEÇAR!!\n";
-    }
-
-    public String[] nomes() {
-        for (int i = 0; i < nome.length; i++) {
-            System.out.print("Nome do seu personagem " + (i + 1) + ": ");
-            nome[i] = scanner.nextLine();
-        }
-        return nome;
-    }
-
-    public void escolherClasse() {
-        for (int i = 0; i < classe.length; i++) {
-            System.out.println("Escolha a classe para " + nome[i] + ":");
-            System.out.println("1 - Guerreiro\n2 - Mago\n3 - Arqueiro");
-            int escolha = scanner.nextInt();
-            scanner.nextLine(); // consome quebra de linha
-
-            switch (escolha) {
-                case 1:
-                    classe[i] = "Guerreiro";
-                    break;
-                case 2:
-                    classe[i] = "Mago";
-                    break;
-                case 3:
-                    classe[i] = "Arqueiro";
-                    break;
-                default:
-                    System.out.println("Opção inválida! Classe padrão: Guerreiro.");
-                    classe[i] = "Guerreiro";
-                    break;
-            }
-
-            atribuindoHabilidades(i);
-            atribuindoVida(i);
-            atribuindoMana(i);
+    public void atacar() {
+        switch (classe.toLowerCase()) {
+            case "mago":
+                System.out.println(name + " lança uma bola de fogo! Causando " + forca + " de dano.");
+                break;
+            case "guerreiro":
+                System.out.println(name + " ataca com sua espada! Causando " + forca + " de dano.");
+                break;
+            case "arqueiro":
+                System.out.println(name + " dispara uma flecha! Causando " + forca + " de dano.");
+                break;
         }
     }
 
-    public String atribuindoHabilidades(int indice) {
-        if (classe[indice].equals("Guerreiro")) {
-            return habilidade[indice] = "Golpe Poderoso";
-        } else if (classe[indice].equals("Mago")) {
-            return habilidade[indice] = "Feitiço";
-        } else if (classe[indice].equals("Arqueiro")) {
-            return habilidade[indice] = "Flecha";
-        } else {
-            return habilidade[indice] = "Ataque Básico";
+    public void receberDano(int dano) {
+        vida -= dano;
+        if (vida < 0) vida = 0;
+        System.out.println(name + " recebeu " + dano + " de dano. Vida atual: " + vida);
+    }
+
+    public void usarHabilidadeEspecial() {
+        switch (classe.toLowerCase()) {
+            case "mago":
+                if (mana >= 20) {
+                    mana -= 20;
+                    System.out.println(name + " usou Feitiço Supremo! Mana restante: " + mana);
+                } else {
+                    System.out.println(name + " não tem mana suficiente!");
+                }
+                break;
+            case "guerreiro":
+                System.out.println(name + " usou Golpe Poderoso! Força aumentada temporariamente.");
+                forca += 3;
+                break;
+            case "arqueiro":
+                System.out.println(name + " usou Tiro Triplo! Três flechas disparadas.");
+                break;
         }
     }
 
-    public void atribuindoVida(int indice) {
-        vida[indice] = 100; // vida padrão para todas as classes
+    public void mostrarStatus() {
+        System.out.println("Status:");
+        System.out.println("Nome: " + name + " | Classe: " + classe + " | Nível: " + nivel +
+                " | Vida: " + vida + " | Força: " + forca +
+                (classe.equalsIgnoreCase("Mago") ? " | Mana: " + mana : ""));
     }
 
-    public void atribuindoMana(int indice) {
-        if (classe[indice].equals("Mago")) {
-            mana[indice] = 200;
-        } 
+    public void subirNivel() {
+        nivel++;
+        vida = Math.min(vida + 10, 100);
+        forca += 1;
+        if (classe.equalsIgnoreCase("Mago")) {
+            mana = Math.min(mana + 10, 100);
+        }
+        System.out.println(name + " subiu de nível! Agora está no nível " + nivel);
+    }
+
+    public void desenharPersonagem() {
+        System.out.println("Desenho do Personagem:");
+
+        switch (classe.toLowerCase()) {
+            case "mago":
+                System.out.println("   /////   ");
+                System.out.println("  | o o |  ");
+                System.out.println(" (|  ^  |) ");
+                System.out.println("  | [_] |  ");
+                System.out.println("   /M\\   ");
+                break;
+            case "guerreiro":
+                System.out.println("   /////   ");
+                System.out.println("  | > < |  ");
+                System.out.println(" (|  -  |) ");
+                System.out.println("  | |_| |  ");
+                System.out.println("   /G\\    ");
+                break;
+            case "arqueiro":
+                System.out.println("   /////   ");
+                System.out.println("  | o o |  ");
+                System.out.println(" (|  v  |) ");
+                System.out.println("  | [_] |  ");
+                System.out.println("   /A\\    ");
+                break;
+            case "morto":
+                System.out.println("   _____   ");
+                System.out.println("  | x x |  ");
+                System.out.println(" (|  ^  |) ");
+                System.out.println("  | ::: |  ");
+                System.out.println("   \\___/  ");
+                break;    
+            default:
+                System.out.println("Desenho indisponível para essa classe.");
+        }
     }
 }
